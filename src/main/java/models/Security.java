@@ -1,8 +1,21 @@
-package MainPackage;
+package models;
 
-public class Security {
-    int id;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Entity
+@Table(name = "table_securities")
+public class Security implements Serializable {
+    @Id
+    Integer id;
     String secid;
+    @OneToMany(mappedBy = "security", cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<History> histories ;
+
     String shortname;
     String regnumber;
     String name;
@@ -14,9 +27,37 @@ public class Security {
     String emitent_okpo;
     String gosreg;
     String type;
+    @Column(name ="groupofsecurities")
     String group;
     String primary_boardid;
     String marketprice_boardid;
+
+    public List<History> getHistories() {
+        return histories;
+    }
+
+    public Security (){
+        histories= new ArrayList<History>();
+    }
+
+    public void removeHistory(History history){
+        histories.remove(history);
+    }
+    public List<History> getHistory(){
+        return histories;
+    }
+
+    public void addHistory (History history){
+        history.setSecurity(this);
+        histories.add(history);
+    }
+    public void setHistories(List<History> histories) {
+        this.histories = histories;
+    }
+
+    public String getSecid() {
+        return secid;
+    }
 
     public void setId(int id) {
         this.id = id;
