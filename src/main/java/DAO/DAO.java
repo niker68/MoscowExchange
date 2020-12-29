@@ -34,13 +34,13 @@ public class DAO {
 
     public void delete(Security security) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         Transaction tx1 = session.beginTransaction();
         session.delete(security);
         tx1.commit();
         session.close();
     }
 
+    //удаляет список акций
     public void delete(List<Security> list) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
@@ -50,8 +50,6 @@ public class DAO {
         tx1.commit();
         session.close();
     }
-
-
 
     public List <Security>findAll() {
         List <Security> list;

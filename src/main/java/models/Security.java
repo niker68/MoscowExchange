@@ -14,7 +14,34 @@ public class Security implements Serializable {
     Integer id;
     String secid;
     @OneToMany(mappedBy = "security", cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<History> histories ;
+    private List<models.History> histories ;
+
+    public Security(Integer id, String secid, List<History> histories, String shortname, String regnumber, String name, String isin, int is_traded, int emitent_id, String emitent_title, String emitent_inn, String emitent_okpo, String gosreg, String type, String group, String primary_boardid, String marketprice_boardid) {
+        this.id = id;
+        this.secid = secid;
+        this.histories = histories;
+        this.shortname = shortname;
+        this.regnumber = regnumber;
+        this.name = name;
+        this.isin = isin;
+        this.is_traded = is_traded;
+        this.emitent_id = emitent_id;
+        this.emitent_title = emitent_title;
+        this.emitent_inn = emitent_inn;
+        this.emitent_okpo = emitent_okpo;
+        this.gosreg = gosreg;
+        this.type = type;
+        this.group = group;
+        this.primary_boardid = primary_boardid;
+        this.marketprice_boardid = marketprice_boardid;
+    }
+    //используется в сервлете AddSecurity при добавлении вручную
+    public Security(Integer id, String secid, String shortname, String name) {
+        this.id = id;
+        this.secid = secid;
+        this.shortname = shortname;
+        this.name = name;
+    }
 
     String shortname;
     String regnumber;
@@ -32,9 +59,6 @@ public class Security implements Serializable {
     String primary_boardid;
     String marketprice_boardid;
 
-    public List<History> getHistories() {
-        return histories;
-    }
 
     public Security (){
         histories= new ArrayList<History>();
@@ -121,6 +145,66 @@ public class Security implements Serializable {
 
     public void setMarketprice_boardid(String marketprice_boardid) {
         this.marketprice_boardid = marketprice_boardid;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getShortname() {
+        return shortname;
+    }
+
+    public String getRegnumber() {
+        return regnumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public int getIs_traded() {
+        return is_traded;
+    }
+
+    public int getEmitent_id() {
+        return emitent_id;
+    }
+
+    public String getEmitent_title() {
+        return emitent_title;
+    }
+
+    public String getEmitent_inn() {
+        return emitent_inn;
+    }
+
+    public String getEmitent_okpo() {
+        return emitent_okpo;
+    }
+
+    public String getGosreg() {
+        return gosreg;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public String getPrimary_boardid() {
+        return primary_boardid;
+    }
+
+    public String getMarketprice_boardid() {
+        return marketprice_boardid;
     }
 
     @Override

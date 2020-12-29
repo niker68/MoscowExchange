@@ -12,23 +12,23 @@ public class History implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-String boardid;
-Date tradedate;
+public String boardid;
+public Date tradedate;
 String shortname;
 @Column(name="secid", insertable = false, updatable = false)
 String secid;
-Double numtrades;
-Double value;
-Double open;
-Double low;
-Double high;
-Double legalcloseprice;
+public Double numtrades;
+public Double value;
+public Double open;
+public Double low;
+public Double high;
+public Double legalcloseprice;
 Double warprice;
-Double close;
-Double volume;
-Double marketprice2;
-Double marketprice3;
-Double admittedvalue;
+public Double close;
+public Double volume;
+public Double marketprice2;
+public Double marketprice3;
+public Double admittedvalue;
 Double waval;
 Double admittedquote;
 Double mp2valtrd;

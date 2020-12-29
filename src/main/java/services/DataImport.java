@@ -18,7 +18,8 @@ import java.util.*;
 
 public class DataImport {
 
-
+    //принимает файл ценных бумаг с Московской биржи, преобразует в список объектов Security и возвращает этот список
+    //используется в методе AddSecuriritiesInDB
     public static ArrayList<Security> getListOfSecuritiesFromXML(File file) throws IOException, SAXException, ParserConfigurationException {
         ArrayList <Security> securities = new ArrayList();
         // Получение фабрики, чтобы после получить билдер документов.
@@ -70,8 +71,10 @@ public class DataImport {
         }
     }
 
-    public static ArrayList<History> getListOfHistoriesFromXML(File file1) throws IOException, SAXException, ParserConfigurationException, ParseException {
-        ArrayList <History> histories = new ArrayList();
+    //принимает файл историй операций ценных бумаг с Московской биржи, преобразует в список объектов History и возвращает этот список
+    //используется в методе  AddHistoriesInDB
+    public static List<History> getListOfHistoriesFromXML(File file1) throws IOException, SAXException, ParserConfigurationException, ParseException {
+        List <History> histories = new ArrayList();
         // Получение фабрики, чтобы после получить билдер документов.
         DocumentBuilderFactory factory1 = DocumentBuilderFactory.newInstance();
 
@@ -92,8 +95,9 @@ public class DataImport {
 
             // Добавление истории. Атрибут - тоже Node, потому нам нужно получить значение атрибута с помощью метода getNodeValue()
             History historynew = new History();
-            if (!attributes.getNamedItem("BOARDID").getNodeValue().isEmpty())
-            historynew.setBoardid(attributes.getNamedItem("BOARDID").getNodeValue());
+            if (!attributes.getNamedItem("BOARDID").getNodeValue().isEmpty()) {
+                historynew.setBoardid(attributes.getNamedItem("BOARDID").getNodeValue());
+            }
 
             String stringDate=attributes.getNamedItem("TRADEDATE").getNodeValue();
             String [] array = stringDate.split("-");
@@ -139,33 +143,41 @@ public class DataImport {
         }
         return histories;
     }
+
+    //использовался для отладки
     public static void importAndPrintHistories(File file) throws ParserConfigurationException, SAXException, IOException, ParseException {
-        ArrayList <History>list = getListOfHistoriesFromXML(file);
+        List <History>list = getListOfHistoriesFromXML(file);
         for (History history:list) {
             System.out.println(history.toString());
         }
     }
-    public static void AddSecuriritiesInDB(ArrayList<File> filesOfSecurities) throws ParserConfigurationException, SAXException, IOException, ParseException {
 
-        ServiceDAO dao = new ServiceDAO();
+    //добавляет список объектов Securities в базу данных. Для тех ценных бумаг записи
+    //используется в сервлете UploadSecurities
+    public static void AddSecuriritiesInDB(List<File> filesOfSecurities) throws ParserConfigurationException, SAXException, IOException, ParseException {
+
+        SecurityService securityService = new SecurityService();
         for (File file : filesOfSecurities) {
-            ArrayList<Security> securities = DataImport.getListOfSecuritiesFromXML(file);
-            dao.saveList(securities);
+            List<Security> securities = DataImport.getListOfSecuritiesFromXML(file);
+            securityService.saveList(securities);
             System.out.println("Добавлено или обновлено " + securities.size()+" ценных бумаг в базе данных");
         }
     }
-    public static void AddHistoriesInDB(ArrayList<File> filesOfHistories) throws SAXException, ParserConfigurationException, ParseException, IOException {
 
-        ServiceDAO dao = new ServiceDAO();
+    //добавляет список объектов Histories в базу данных. Связь Many-To-One с Securities. History без Security не существует.
+    //используется в сервлете UploadHistories
+    public static void AddHistoriesInDB(List<File> filesOfHistories) throws SAXException, ParserConfigurationException, ParseException, IOException {
+
+        SecurityService securityService = new SecurityService();
         for (File file:filesOfHistories ) {
-            ArrayList<History> histories = DataImport.getListOfHistoriesFromXML(file);
-            List<Security> securities = dao.findAll();
+            List<History> histories = DataImport.getListOfHistoriesFromXML(file);
+            List<Security> securities = securityService.findAll();
             for (History history: histories) {
                 for (Security security:securities) {
                     if (security.getSecid().equals(history.getSecid())){
                         history.setSecurity(security);
                         security.addHistory(history);
-                        dao.saveOrUpdate(security);
+                        securityService.saveOrUpdate(security);
                     }
                 }
             }
