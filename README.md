@@ -20,7 +20,7 @@
 - Разверните [war-архив](https://github.com/niker68/MoscowExchange/blob/master/out/artifacts/MoscowExchange/MoscowExchange.war) в Apache-TomCat.
 - В браузере домашняя страница приложения адрес_на_котором_вы_развернули_приложение/home 
 
-<img src="https://github.com/niker68/DiceGenerator/blob/master/media/Screenshot_2021-04-14-16-35-06-015_com.dicegenerator.jpg" width="468" height="216" /> 
+<img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-06.png" width="953" height="469" /> 
   
 ## Контакты
   Created by [@niker68](mailto:niker68@yandex.ru)
