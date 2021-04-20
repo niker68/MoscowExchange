@@ -18,7 +18,7 @@
 Для развертывания приложения:
 - Поместите базу данных [db_MoscowExchange](https://github.com/niker68/MoscowExchange/blob/master/db/db_MoscowExchange) в Apache-tomcat-x.x.x/bin/db
 - Разверните [war-архив](https://github.com/niker68/MoscowExchange/blob/master/out/artifacts/MoscowExchange/MoscowExchange.war) в Apache-TomCat.
-- В браузере домашняя страница приложения адрес_на_котором_вы_развернули_приложение/home 
+- В браузере домашняя страница приложения: адрес_на_котором_вы_развернули_приложение/home 
 
 <img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-06.png" width="953" height="469" /> 
 <img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-37.png" width="959" height="238" /> 
