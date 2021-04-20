@@ -21,7 +21,7 @@
 - В браузере домашняя страница приложения адрес_на_котором_вы_развернули_приложение/home 
 
 <img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-06.png" width="953" height="469" /> 
-<img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-37.png" width="959" height="469" /> 
+<img src="https://github.com/niker68/MoscowExchange/blob/master/media/2021-04-20_13-49-37.png" width="959" height="238" /> 
   
 ## Контакты
   Created by [@niker68](mailto:niker68@yandex.ru)
